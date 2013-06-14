@@ -28,6 +28,20 @@ function take() {
     cd $1
 }
 
+function indicate_git_dirty_directory() {
+    local GIT_STATUS
+    GIT_STATUS=$(git status -s 2>/dev/null | tail -n1)
+    if [[ -n $GIT_STATUS ]]; then
+        echo '*'
+    fi
+}
+
+function git_info_prompt() {
+    ref=$(git symbolic-ref HEAD 2> /dev/null) || \
+        ref=$(git rev-parse --short HEAD 2> /dev/null) || return
+    echo "git:${ref#refs/heads/}$(indicate_git_dirty_directory)"
+}
+
 ## Completions ##
 source $DOT_ZSH/zsh-completions.zsh
 
@@ -41,8 +55,11 @@ bindkey "^[m" copy-prev-shell-word # file rename magix
 WORDCHARS=${WORDCHARS//\//}
 
 ## Title and Prompt ##
+setopt prompt_subst
 autoload -U colors && colors
+local right_prompt='$(git_info_prompt)'
 PROMPT="%{$fg[yellow]%}%c ➤ %{$reset_color%}"
+RPROMPT="%{$fg[yellow]%}${right_prompt}%{$reset_color%}"
 precmd(){
     # This seem to work both on terminal and tmux.
     print -Pn "\e]2;%n:%~\a"
