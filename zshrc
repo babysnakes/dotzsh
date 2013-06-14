@@ -40,6 +40,18 @@ bindkey "^[m" copy-prev-shell-word # file rename magix
 # TODO: What does this WORDCHAR do (except for backward-kill-word)?
 WORDCHARS=${WORDCHARS//\//}
 
+## Title and Prompt ##
+autoload -U colors && colors
+PROMPT="%{$fg[yellow]%}%c ➤ %{$reset_color%}"
+precmd(){
+    # This seem to work both on terminal and tmux.
+    print -Pn "\e]2;%n:%~\a"
+}
+preexec(){
+    # This seem to work both on terminal and tmux.
+    print -Pn "\e]2;%n:$(echo "$1" | cut -d" " -f1)\a"
+}
+
 ## smart urls
 autoload -U url-quote-magic
 zle -N self-insert url-quote-magic
