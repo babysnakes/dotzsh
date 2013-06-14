@@ -58,7 +58,7 @@ WORDCHARS=${WORDCHARS//\//}
 setopt prompt_subst
 autoload -U colors && colors
 local right_prompt='$(git_info_prompt)'
-PROMPT="%{$fg[yellow]%}%c ➤ %{$reset_color%}"
+PROMPT="%{$fg[yellow]%}%c%(?. . %{$fg[red]%})➤ %{$reset_color%}"
 RPROMPT="%{$fg[yellow]%}${right_prompt}%{$reset_color%}"
 precmd(){
     # This seem to work both on terminal and tmux.
