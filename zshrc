@@ -28,6 +28,52 @@ function take() {
     cd $1
 }
 
+# manage .chef links
+function dot-chef() {
+    if [ -z "$1" ]; then
+        [ -L .chef ] && \
+            echo ".chef currently points to $(readlink .chef)" || \
+            echo "There is no .chef link!"
+        echo "Run: dot-chef <DIR> in order to link .chef to <DIR>"
+    elif [ ! -d "$1" ]; then
+        echo "Directory \"$1\" doesn't exist!"
+        return 1
+    else
+        [ -L .chef ] && unlink .chef
+        ln -s "$1" .chef
+        ls -l .chef
+    fi
+}
+
+# Functions to add and remove elements from the path. Converts
+# relative paths to absolute paths.
+function add-to-path {
+    if [ -z $1 ]; then
+        echo "Usage: add_to_path DIR"
+        return 1
+    else
+        PATH_TO_ADD=$(echo "$1"(:A))
+        export PATH=${PATH_TO_ADD}:${PATH}
+        rehash
+    fi
+}
+
+function remove-from-path {
+    if [[ -z $1 ]]; then
+        echo "Usage: remove-from-path DIR"
+        return 1
+    else
+        PATH_TO_REMOVE=$(echo "$1"(:A))
+        if [[ $PATH == *$PATH_TO_REMOVE:* ]]; then
+            export PATH=${PATH%$PATH_TO_REMOVE*}${PATH#*$PATH_TO_REMOVE:}
+            rehash
+        elif [[ $PATH == *$PATH_TO_REMOVE ]]; then
+            export PATH-${PATH%$PATH_TO_REMOVE}
+        fi
+    fi
+}
+
+# prompt helpers
 function indicate_git_dirty_directory() {
     local GIT_STATUS
     GIT_STATUS=$(git status -s 2>/dev/null | tail -n1)
