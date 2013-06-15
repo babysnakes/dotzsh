@@ -115,7 +115,7 @@ PROMPT="%{$fg[yellow]%}%c%(?. . %{$fg[red]%})➤ %{$reset_color%}"
 RPROMPT="%{$fg[yellow]%}${right_prompt}%{$reset_color%}"
 precmd(){
     # iterm tab title (last 15 characters of path).
-    print -Pn "\e]1;%15<..<%~%<<:\a"
+    print -Pn "\e]1;%15<..<%~%<<\a"
     # This seem to work both on terminal and tmux.
     print -Pn "\e]2;%n@%m:%~\a"
 }
