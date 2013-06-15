@@ -21,6 +21,9 @@ setopt hist_ignore_space
 setopt hist_verify
 setopt inc_append_history
 setopt share_history
+# Searched by started commands
+bindkey '^X^P' up-line-or-search
+bindkey '^X^N' down-line-or-search
 
 ## Helpers ##
 function take() {
