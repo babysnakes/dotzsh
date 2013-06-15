@@ -43,7 +43,7 @@ function git_info_prompt() {
 }
 
 ## Completions ##
-source $DOT_ZSH/zsh-completions.zsh
+source $DOT_ZSH/completions.zsh
 
 ## Line edit ##
 autoload -U edit-command-line
