@@ -1,0 +1,6 @@
+#compdef use
+
+_use() {
+       _values "Available Packages" \
+               $(use -l 2>&1 | grep "^\s\+\w"| awk '{print $1}')
+}

@@ -85,6 +85,9 @@ export LESS="-R"
 export GREP_OPTIONS='--color=auto'
 export GREP_COLOR='1;32'
 
+## fpath
+fpath = ($DOT_ZSH/tmp-completions $DOT_ZSH/custom-completions $DOT_ZSH/zsh-completions/src $fpath)
+
 # Local Variables:
 # mode: shell-script
 # End:

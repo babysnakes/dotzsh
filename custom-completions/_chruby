@@ -1,0 +1,7 @@
+#compdef chruby
+
+# Although this cause some 
+_chruby() {
+  # Don't forget to remove selected ruby mark
+  _values "Available versions" $(chruby | sed 's/\*/ /')
+}
