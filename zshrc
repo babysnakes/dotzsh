@@ -155,7 +155,7 @@ alias gst="git status"
      $HOME/.tmuxinator/scripts/tmuxinator
 
 # Source settings from the temporary directory
-for i in $DOT_ZSH/settings-enabled/*.zsh; do
+for i in $DOT_ZSH/settings-enabled/*.zsh(N); do
     source $i
 done
 
