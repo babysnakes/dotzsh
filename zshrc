@@ -114,13 +114,13 @@ precmd(){
     # iterm tab title (last 15 characters of path).
     print -Pn "\e]1;%15<..<%~%<<:\a"
     # This seem to work both on terminal and tmux.
-    print -Pn "\e]2;%n:%~\a"
+    print -Pn "\e]2;%n@%m:%~\a"
 }
 preexec(){
     # iterm tab title (not sure exactly how it operates).
     print -Pn "\e]1;%100>...>${2:gs/%/%%}%<<\a"
     # This seem to work both on terminal and tmux.
-    print -Pn "\e]2;%n:$(echo "$1" | cut -d" " -f1)\a"
+    print -Pn "\e]2;%n@%m:$(echo "$1" | cut -d" " -f1)\a"
 }
 
 ## Shell customizations ##
