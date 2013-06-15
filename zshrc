@@ -69,6 +69,7 @@ function remove-from-path {
             rehash
         elif [[ $PATH == *$PATH_TO_REMOVE ]]; then
             export PATH=${PATH%$PATH_TO_REMOVE}
+            rehash
         fi
     fi
 }
