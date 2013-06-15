@@ -88,6 +88,9 @@ function git_info_prompt() {
     echo "git:${ref#refs/heads/}$(indicate_git_dirty_directory)"
 }
 
+## Completions search path ##
+fpath=($DOT_ZSH/tmp-completions $DOT_ZSH/custom-completions $DOT_ZSH/zsh-completions/src $fpath)
+
 ## Completions ##
 source $DOT_ZSH/completions.zsh
 
@@ -115,24 +118,37 @@ preexec(){
     print -Pn "\e]2;%n:$(echo "$1" | cut -d" " -f1)\a"
 }
 
-## smart urls
+## Shell customizations ##
+
+# smart urls
 autoload -U url-quote-magic
 zle -N self-insert url-quote-magic
 
-## jobs
+# jobs
 setopt long_list_jobs
 setopt notify
 
-## pager
+## Application Specific ##
+
+# pager
 export PAGER="less"
 export LESS="-R"
 
-## grep
+# grep
 export GREP_OPTIONS='--color=auto'
 export GREP_COLOR='1;32'
 
-## fpath
-fpath=($DOT_ZSH/tmp-completions $DOT_ZSH/custom-completions $DOT_ZSH/zsh-completions/src $fpath)
+# nvm
+[[ -s /Users/haim/.nvm/nvm.sh ]] && . /Users/haim/.nvm/nvm.sh
+
+# bundler
+alias be="bundle exec"
+
+# allow square brackets for rake task invocation
+alias rake='noglob rake'
+
+# git
+alias gst="git status"
 
 # Local Variables:
 # mode: shell-script
