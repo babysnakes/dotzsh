@@ -68,7 +68,7 @@ function remove-from-path {
             export PATH=${PATH%$PATH_TO_REMOVE*}${PATH#*$PATH_TO_REMOVE:}
             rehash
         elif [[ $PATH == *$PATH_TO_REMOVE ]]; then
-            export PATH-${PATH%$PATH_TO_REMOVE}
+            export PATH=${PATH%$PATH_TO_REMOVE}
         fi
     fi
 }
