@@ -150,6 +150,15 @@ alias rake='noglob rake'
 # git
 alias gst="git status"
 
+# tmuxinator
+ [[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source \
+     $HOME/.tmuxinator/scripts/tmuxinator
+
+# Source settings from the temporary directory
+for i in $DOT_ZSH/settings-enabled/*.zsh; do
+    source $i
+done
+
 # Local Variables:
 # mode: shell-script
 # End:

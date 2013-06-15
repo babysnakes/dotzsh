@@ -18,4 +18,12 @@ Here's a list of the directories were completions are searched
   [zsh-completions][] project.
 * Directories in the default `$fpath`.
 
+## Other directories
+
+* `$DOT_ZSH/settings-enabled` - Every `*.zsh` file in this directory will be
+  sourced. These files are ignored by git.
+* `$DOT_ZSH/settings-available` - Holds various settings. In order to
+  enable these settings they are to be copied/linked to
+  `$DOT_ZSH/settings-enabled`.
+
 [zsh-completions]: http://github.com/zsh-users/zsh-completions
