@@ -111,10 +111,14 @@ local right_prompt='$(git_info_prompt)'
 PROMPT="%{$fg[yellow]%}%c%(?. . %{$fg[red]%})➤ %{$reset_color%}"
 RPROMPT="%{$fg[yellow]%}${right_prompt}%{$reset_color%}"
 precmd(){
+    # iterm tab title (last 15 characters of path).
+    print -Pn "\e]1;%15<..<%~%<<:\a"
     # This seem to work both on terminal and tmux.
     print -Pn "\e]2;%n:%~\a"
 }
 preexec(){
+    # iterm tab title (not sure exactly how it operates).
+    print -Pn "\e]1;%100>...>${2:gs/%/%%}%<<\a"
     # This seem to work both on terminal and tmux.
     print -Pn "\e]2;%n:$(echo "$1" | cut -d" " -f1)\a"
 }
