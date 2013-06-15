@@ -8,3 +8,7 @@ zstyle :compinstall filename '/home/haim/.zshrc'
 autoload -Uz compinit
 compinit
 # End of lines added by compinstall
+
+# Local Variables:
+# mode: shell-script
+# End:
