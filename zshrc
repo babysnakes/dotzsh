@@ -142,6 +142,9 @@ setopt notify
 export PAGER="less"
 export LESS="-R"
 
+# ls with colors
+alias ls='ls -G'
+
 # grep
 export GREP_OPTIONS='--color=auto'
 export GREP_COLOR='1;32'
