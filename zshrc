@@ -87,9 +87,8 @@ function indicate_git_dirty_directory() {
 }
 
 function git_info_prompt() {
-    ref=$(git symbolic-ref HEAD 2> /dev/null) || \
-        ref=$(git rev-parse --short HEAD 2> /dev/null) || return
-    echo "git:${ref#refs/heads/}$(indicate_git_dirty_directory)"
+    ref=$(git rev-parse --abbrev-ref HEAD 2>/dev/null) || return
+    echo "git:${ref}$(indicate_git_dirty_directory)"
 }
 
 ## Completions search path ##
