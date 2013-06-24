@@ -110,7 +110,7 @@ WORDCHARS=${WORDCHARS//\//}
 setopt prompt_subst
 autoload -U colors && colors
 local right_prompt='$(git_info_prompt)'
-PROMPT="%{$fg[yellow]%}%c%(?. . %{$fg[red]%})➤ %{$reset_color%}"
+PROMPT="%(?.%{$fg[yellow]%}✓.%{$fg[red]%}✗) %{$fg[yellow]%}%c ➤ %{$reset_color%}"
 RPROMPT="%{$fg[yellow]%}${right_prompt}%{$reset_color%}"
 precmd(){
     # iterm tab title (last 15 characters of path).
