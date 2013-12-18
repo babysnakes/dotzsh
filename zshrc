@@ -148,8 +148,10 @@ alias ls='ls -G'
 export GREP_OPTIONS='--color=auto'
 export GREP_COLOR='1;32'
 
-# nvm
+# nodejs
 [[ -s /Users/haim/.nvm/nvm.sh ]] && . /Users/haim/.nvm/nvm.sh
+alias npm-path='add-to-path $(npm bin)'
+alias npm-cmpl='source <(npm completion)'
 
 # bundler
 alias be="bundle exec"
