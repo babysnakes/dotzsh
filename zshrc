@@ -55,7 +55,7 @@ function add-to-path {
         echo "Usage: add_to_path DIR"
         return 1
     else
-        PATH_TO_ADD=$(echo "$1"(:A))
+        PATH_TO_ADD=${1:A}
         export PATH=${PATH_TO_ADD}:${PATH}
         rehash
     fi
@@ -66,7 +66,7 @@ function remove-from-path {
         echo "Usage: remove-from-path DIR"
         return 1
     else
-        PATH_TO_REMOVE=$(echo "$1"(:A))
+        PATH_TO_REMOVE=${1:A}
         if [[ $PATH == *$PATH_TO_REMOVE:* ]]; then
             export PATH=${PATH%$PATH_TO_REMOVE*}${PATH#*$PATH_TO_REMOVE:}
             rehash
