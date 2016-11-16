@@ -8,7 +8,7 @@ function use-erlang-elixir() {
     erlang_ver=$1
     elixir_ver=$2
     if [ -z "$erlang_ver" -o -z "$elixir_ver" ]; then
-        echo "Error seting erland and elixir version: missing erlang or elixir version!"
+        echo "Error seting erlang and elixir version: missing erlang or elixir version!"
     fi
     whence kerl_deactivate >/dev/null && kerl_deactivate
     source $erlang_dir/$erlang_ver/activate
@@ -20,7 +20,7 @@ function use-elixir-13() {
 }
 
 function use-elixir-12() {
-    use-erlang-elixir r18 $lixir_12
+    use-erlang-elixir r18 $elixir_12
 }
 
 use-elixir-13
