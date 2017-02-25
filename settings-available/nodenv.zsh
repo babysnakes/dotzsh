@@ -1,1 +1,1 @@
-eval $(nodenv init - --no-rehash zsh)
+eval "$(nodenv init - --no-rehash zsh)"
