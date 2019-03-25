@@ -31,23 +31,6 @@ function take() {
     cd $1
 }
 
-# manage .chef links
-function dot-chef() {
-    if [ -z "$1" ]; then
-        [ -L .chef ] && \
-            echo ".chef currently points to $(readlink .chef)" || \
-            echo "There is no .chef link!"
-        echo "Run: dot-chef <DIR> in order to link .chef to <DIR>"
-    elif [ ! -d "$1" ]; then
-        echo "Directory \"$1\" doesn't exist!"
-        return 1
-    else
-        [ -L .chef ] && unlink .chef
-        ln -s "$1" .chef
-        ls -l .chef
-    fi
-}
-
 # Functions to add and remove elements from the path. Converts
 # relative paths to absolute paths.
 function add-to-path {
@@ -62,7 +45,7 @@ function add-to-path {
 }
 
 function remove-from-path {
-    if [[ -z $1 ]]; then
+   if [[ -z $1 ]]; then
         echo "Usage: remove-from-path DIR"
         return 1
     else
@@ -161,15 +144,11 @@ alias rake='noglob rake'
 # git
 alias gst="git status"
 
-# tmuxinator
- [[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source \
-     $HOME/.tmuxinator/scripts/tmuxinator
+# Editor
+export EDITOR=vim
+alias edit=$EDITOR
 
 # Source settings from the temporary directory
 for i in $DOT_ZSH/settings-enabled/*.zsh(N); do
     source $i
 done
-
-# Local Variables:
-# mode: shell-script
-# End:
