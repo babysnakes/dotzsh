@@ -145,7 +145,7 @@ alias rake='noglob rake'
 alias gst="git status"
 
 # Editor
-export EDITOR=vim
+export EDITOR=nvim
 alias edit=$EDITOR
 
 # Source settings from the temporary directory
