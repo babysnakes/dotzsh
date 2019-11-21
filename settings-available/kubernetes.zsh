@@ -1,4 +1,6 @@
 function k8comp() {
-    source <(kubectl completion zsh)
-    # source <(minikube completion zsh) # zsh not yet supported
+    which kubectl >&/dev/null && source <(kubectl completion zsh)
+    which minikube >&/dev/null && source <(minikube completion zsh)
+    which helm >&/dev/null && source <(helm completion zsh)
+    alias k=kubectl
 }

@@ -146,6 +146,7 @@ alias gst="git status"
 
 # Editor
 export EDITOR=nvim
+alias vim=nvim
 alias edit=$EDITOR
 
 # Source settings from the temporary directory
