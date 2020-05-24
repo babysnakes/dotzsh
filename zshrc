@@ -135,8 +135,7 @@ export GREP_COLOR='1;32'
 alias gst="git status"
 
 # Editor
-export EDITOR=nvim
-alias vim=nvim
+export EDITOR=vim
 alias edit=$EDITOR
 
 # Source settings from the temporary directory
