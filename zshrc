@@ -128,7 +128,7 @@ export LESS="-R"
 alias ls='ls -G'
 
 # grep
-export GREP_OPTIONS='--color=auto'
+alias grep='grep --color=auto'
 export GREP_COLOR='1;32'
 
 # git
