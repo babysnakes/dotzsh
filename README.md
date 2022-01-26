@@ -5,6 +5,8 @@
 * Clone this respository as `$HOME/.zsh`.
 * Update submodules: `git submodule update --init`.
 * Symlink `REPOSITORY_ROOT/zshrc` to `$HOME/.zshrc`.
+* Make sure you link one of `REPOSITORY_ROOT/settings-available/0-prompt*.zsh`
+  to `settings-enabled` (see [Other directories](#other-directories) below).
 
 ## Completion directories
 Here's a list of the directories were completions are searched
