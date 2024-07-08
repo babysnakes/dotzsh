@@ -60,6 +60,19 @@ function remove-from-path {
     fi
 }
 
+# A helper to enable settings file
+function enable-settings-file {
+    file_name=`basename ${1}`
+
+    if [ -z "$file_name" ]; then
+        echo "Must specify settings file"
+        exit 1
+    fi
+
+    setting=${DOT_ZSH}/settings-available/${file_name}
+    ln -s ${setting} ${DOT_ZSH}/settings-enabled/
+}
+
 ## Completions search path ##
 fpath=($DOT_ZSH/tmp-completions $DOT_ZSH/custom-completions $DOT_ZSH/zsh-completions/src $fpath)
 
