@@ -4,5 +4,5 @@ function k8comp() {
     which helm >&/dev/null && source <(helm completion zsh)
     alias k=kubectl
     autoload -U +X bashcompinit && bashcompinit
-    complete -o nospace -C /usr/local/bin/kustomize kustomize
+    complete -o nospace -C ${HOMEBREW_PREFIX}/bin/kustomize kustomize
 }

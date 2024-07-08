@@ -1,4 +1,4 @@
-if [ -e /usr/local/bin/direnv ]; then
+if [ -e ${HOMEBREW_PREFIX}/bin/direnv ]; then
   eval "$(direnv hook zsh)"
 else
   echo "direnv not installed"

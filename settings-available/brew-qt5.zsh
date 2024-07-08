@@ -1,1 +1,1 @@
-export PATH="/usr/local/opt/qt/bin:${PATH}"
+export PATH="${HOMEBREW_PREFIX}/opt/qt/bin:${PATH}"
