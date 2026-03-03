@@ -1,12 +1,23 @@
 DOT_ZSH=${HOME}/.zsh
 
+function exit_with_error() {
+  echo $1
+  exit -1
+}
+
+# ZAP - https://www.zapzsh.com/
+[ -f "${XDG_DATA_HOME:-$HOME/.local/share}/zap/zap.zsh" ] || \
+  exit_with_error "It seems that zap is not installed. Please install it first"
+
+source "${XDG_DATA_HOME:-$HOME/.local/share}/zap/zap.zsh"
+
 ## Files and Directories ##
 alias pu='pushd'
 alias po='popd'
-setopt auto_pushd
-setopt pushd_ignore_dups
-setopt autocd
-setopt extendedglob
+setopt AUTO_PUSHD
+setopt PUSHD_IGNORE_DUPS
+setopt AUTO_CD
+setopt EXTENDED_GLOB
 #setopt pushdminus # do we need it?
 
 ## History ##
@@ -14,16 +25,30 @@ HISTFILE=$HOME/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
 alias history='fc -l 1'
-setopt append_history
-setopt extended_history # !!!
-setopt hist_ignore_all_dups
-setopt hist_ignore_space
-setopt hist_verify
-setopt inc_append_history
-setopt share_history
-# Searched by started commands
-bindkey '^X^P' up-line-or-search
-bindkey '^X^N' down-line-or-search
+setopt APPEND_HISTORY
+# setopt EXTENDED_HISTORY # !!!
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_IGNORE_SPACE
+setopt HIST_VERIFY # ?
+setopt INC_APPEND_HISTORY
+# setopt SHARE_HISTORY # this imports shared history. Can trigger manually with fc -RI
+
+# A git ignored file that contains PATH directories that are required for the plugins
+# (e.g. where fzf, exa, etc are installed)
+[[ -f ${DOT_ZSH}/paths.zsh ]] || touch ${DOT_ZSH}/paths.zsh
+plug "${DOT_ZSH}/paths.zsh"
+
+## Plugins ##
+if (( $+commands[fzf] )); then
+    plug "Aloxaf/fzf-tab"
+else
+    echo "no fzf installed, skipping fzf-tab"
+fi
+plug "zsh-users/zsh-autosuggestions"
+# plug "zap-zsh/supercharge"
+plug "zap-zsh/zap-prompt" # just in case we don't override this
+plug "zsh-users/zsh-syntax-highlighting"
+plug "zap-zsh/exa"
 
 ## Helpers ##
 function take() {
@@ -76,49 +101,9 @@ function enable-settings-file {
 ## Completions search path ##
 fpath=($DOT_ZSH/tmp-completions $DOT_ZSH/custom-completions $DOT_ZSH/zsh-completions/src $fpath)
 
-## Completions ##
-source $DOT_ZSH/completions.zsh
-
-## Line edit ##
-autoload -U edit-command-line
-zle -N edit-command-line
-bindkey '\C-x\C-e' edit-command-line
-bindkey -e
-bindkey "^[m" copy-prev-shell-word # file rename magix
-# TODO: What does this WORDCHAR do (except for backward-kill-word)?
-WORDCHARS=${WORDCHARS//\//}
-
-## Shell customizations ##
-
-# smart urls
-autoload -U url-quote-magic
-zle -N self-insert url-quote-magic
-
-# jobs
-setopt long_list_jobs
-setopt notify
-
-## Application Specific ##
-
-# pager
-export PAGER="less"
-export LESS="-R"
-
-# ls with colors
-alias ls='ls -G'
-
-# grep
-alias grep='grep --color=auto'
-export GREP_COLOR='1;32'
-
 # git
 alias gst="git status"
 
-# Editor
-export EDITOR=vim
-alias edit=$EDITOR
+## Source all enabled settings
+plug "${DOT_ZSH}/settings-enabled/*"
 
-# Source settings from the temporary directory
-for i in $DOT_ZSH/settings-enabled/*.zsh(N); do
-    source $i
-done
