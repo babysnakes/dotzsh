@@ -107,3 +107,7 @@ alias gst="git status"
 ## Source all enabled settings
 plug "${DOT_ZSH}/settings-enabled/*"
 
+## Completions ##
+
+# case-insensitive paths
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
